@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="stats">
+  <div class="stat pending"><span id="count-pending">0</span>Pending</div>
+  <div class="stat progress"><span id="count-progress">0</span>In Progress</div>
+  <div class="stat resolved"><span id="count-resolved">0</span>Resolved</div>
+</section>
+
+<section class="card">
+  <div class="inline">
+    <label for="filter">Filter:</label>
+    <select id="filter">
+      <option value="">All</option>
+      {% for s in statuses %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+    </select>
+  </div>
+  <div id="dash-error" class="error-banner" hidden></div>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Category</th><th>Priority</th><th>Assigned To</th><th>Status</th><th>Created</th></tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='dashboard.js') }}"></script>{% endblock %}

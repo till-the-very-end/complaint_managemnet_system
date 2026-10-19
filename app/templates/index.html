@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Submit a Complaint</h2>
+  <form id="complaint-form" novalidate>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" maxlength="100">
+    <span class="error" id="err-name"></span>
+
+    <label for="category">Category</label>
+    <select id="category" name="category">
+      <option value="">-- Select --</option>
+      {% for c in categories %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+    </select>
+    <span class="error" id="err-category"></span>
+
+    <label for="priority">Priority</label>
+    <select id="priority" name="priority">
+      <option value="">-- Select --</option>
+      {% for p in priorities %}<option value="{{ p }}">{{ p }}</option>{% endfor %}
+    </select>
+    <span class="error" id="err-priority"></span>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="5" maxlength="1000"></textarea>
+    <span class="error" id="err-description"></span>
+
+    <button type="submit" id="submit-btn">Submit</button>
+  </form>
+  <div id="result" class="result" hidden></div>
+</section>
+
+<section class="card">
+  <h2>Track a Complaint</h2>
+  <div class="inline">
+    <input type="text" id="track-id" placeholder="e.g. CMP-2026-0001">
+    <button id="track-btn" type="button">Track</button>
+  </div>
+  <div id="track-result" class="result" hidden></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='form.js') }}"></script>{% endblock %}
